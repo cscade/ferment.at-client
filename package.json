@@ -8,7 +8,8 @@
     "memdown": "~0.5.1",
     "leveldown": "~0.9.1",
     "async": "~0.2.9",
-    "bunyan": "~0.22.0"
+    "bunyan": "~0.22.0",
+    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
