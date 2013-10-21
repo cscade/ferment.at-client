@@ -6,6 +6,8 @@
     "express": "~3.4.2",
     "levelup": "~0.17.0",
     "memdown": "~0.5.1",
-    "leveldown": "~0.9.1"
+    "leveldown": "~0.9.1",
+    "async": "~0.2.9",
+    "bunyan": "~0.22.0"
   }
 }
