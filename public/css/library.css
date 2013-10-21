@@ -1,4 +1,5 @@
 body{padding-top:60px}
+tr.interactive{cursor:pointer}
 .table tbody>tr>td.log-level{width:80px;vertical-align:middle;text-align:right;font-weight:200;font-size:12px;}
 .table tbody>tr>td.log-level.log-level-trace{color:#c0c0c0}
 .table tbody>tr>td.log-level.log-level-debug{color:#808080}
@@ -8,4 +9,4 @@ body{padding-top:60px}
 .table tbody>tr>td.log-level.log-level-fatal{color:#d9534f;font-weight:bold}
 @media (min-width: 768px){.dl-horizontal dt{width:200px}
 .dl-horizontal dd{margin-left:220px}
-}
+}.syntaxhighlighter .string,.syntaxhighlighter .string a{color:#39c !important}
