@@ -4,3 +4,37 @@
 
 body
 	padding-top 60px
+
+.table tbody>tr>td.log-level
+	width 80px
+	vertical-align middle
+	text-align right
+	font-weight 200
+	font-size 12px
+	
+	&.log-level-trace
+		color silver
+	
+	&.log-level-debug
+		color grey
+	
+	&.log-level-info
+		color #4cae4c
+	
+	&.log-level-warn
+		color #eea236
+	
+	&.log-level-error
+		color #d9534f
+	
+	&.log-level-fatal
+		color #d9534f
+		font-weight bold
+
+@media (min-width: 768px)
+	.dl-horizontal
+		dt
+			width 200px
+		
+		dd
+			margin-left 220px

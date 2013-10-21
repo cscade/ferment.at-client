@@ -16,7 +16,9 @@ var flash = require('connect-flash');
 var fs = require('fs');
 var http = require('http');
 var levelup = require('levelup');
+var moment = require('moment');
 var path = require('path');
+var ringbuffer = new bunyan.RingBuffer({ limit: 100 });
 
 var MemDOWN = require('memdown');
 
@@ -31,6 +33,28 @@ app.set('package', require('./package.json'));
 /*
 	Jade locals.
 */
+app.locals.logLevels = {
+	10: 'TRACE',
+	20: 'DEBUG',
+	30: 'INFO',
+	40: 'WARN',
+	50: 'ERROR',
+	60: 'FATAL'
+};
+app.locals.logs = function () {
+	var level = app.get('env') === 'production' ? bunyan.resolveLevel('info') : bunyan.resolveLevel('trace');
+	var logs = [];
+	
+	for (var i = ringbuffer.records.length - 1; i >= 0; i--) {
+		if (ringbuffer.records[i].level >= level) logs.push({
+			level: ringbuffer.records[i].level,
+			msg: ringbuffer.records[i].msg,
+			time: ringbuffer.records[i].time
+		});
+	}
+	return logs;
+};
+app.locals.moment = moment;
 app.locals.version = app.get('package').version;
 
 /*
@@ -59,7 +83,7 @@ async.series({
 				{
 					level: app.get('env') === 'development' ? 'trace' : 'info',
 					type: 'raw',
-					stream: new bunyan.RingBuffer({ limit: 100 })
+					stream: ringbuffer
 				},
 				app.get('env') === 'development' ? {
 					level: 'trace',
@@ -70,7 +94,7 @@ async.series({
 		app.log.info({
 			environment: app.get('env'),
 			writable: app.get('environmentWritable')
-		}, 'Setting up.');
+		}, 'Starting up.');
 		app.log.trace('Logger initialized.');
 		next();
 	},
@@ -149,5 +173,5 @@ async.series({
 		environment: app.get('env'),
 		port: app.get('config').listen,
 		version: app.get('package').version
-	}, 'http server ready');
+	}, 'Client ready.');
 });

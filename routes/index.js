@@ -12,6 +12,13 @@ module.exports = function (app) {
 	});
 	
 	/*
+		## GET /logs
+	*/
+	app.get('/logs', function (req, res) {
+		res.render('logs');
+	});
+	
+	/*
 		404
 	*/
 	app.all('*', function (req, res) {
