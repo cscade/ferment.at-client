@@ -33,6 +33,7 @@ module.exports = function (grunt) {
 			],
 			server: [
 				'app.js',
+				'lib/**/*.js',
 				'routes/**/*.js'
 			],
 			client: [
@@ -46,6 +47,7 @@ module.exports = function (grunt) {
 				files: {
 					src: [
 						'app.js',
+						'lib/**/*.js',
 						'routes/**/*.js',
 						'<%= locations.js.src %>/views/**/*.js'
 					]
@@ -133,6 +135,7 @@ module.exports = function (grunt) {
 			server: {
 				files: [
 					'app.js',
+					'lib/**/*.js',
 					'routes/**/*.js'
 				],
 				tasks: ['jshint:server']
