@@ -1,7 +1,8 @@
 {
   "name": "ferment.at-local",
   "description": "The local (LAN) component of ferment.at.",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "author": "Carson S. Christian <cscade@gmail.com>",
   "dependencies": {
     "express": "~3.4.2",
     "levelup": "~0.17.0",
