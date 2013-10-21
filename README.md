@@ -1,3 +1,5 @@
+![Logo](http://77e48a193d773bf87095-ed78355e050836447af92afb2cca79ca.r2.cf2.rackcdn.com/ferment.at-logo_200.png)
+
 # ferment.at Client
 
 The official client module for the ferment.at cloud logging service.
