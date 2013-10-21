@@ -18,7 +18,7 @@ module.exports = function (app) {
 		if (req.xhr) return res.send(404);
 		app.log.debug({
 			req: req
-		}, '404 not found');
+		}, '404 not found: %s', req.url);
 		res.redirect('/');
 	});
 };
