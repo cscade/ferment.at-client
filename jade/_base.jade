@@ -12,8 +12,8 @@ html(lang='en')
 		link(href='/css/library.css?v=' + version, rel='stylesheet')
 		block head
 	body
+		include ./includes/navbar
 		.container
-			include ./includes/navbar
 			- if (flash)
 				.row
 					.col-sm-8.col-sm-offset-2
