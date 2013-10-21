@@ -41,6 +41,10 @@ At this time there is one officially supported adapter, which connects the Clien
 
 * [BCS-46x Adapter](https://github.com/cscade/fermentat-contrib-adapter-bcs-46x)
 
+## Read-only Deployments
+
+> TODO instructions for raspberry pi in read-only mode
+
 ## Contributing
 
 Contributions to this project are very welcome! Simply open a pull request when you feel you have a useful contribution. If you're considering adding something non-trivial, consider opening a ticket for discussion first to avoid duplicated work.
