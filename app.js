@@ -18,7 +18,7 @@ var http = require('http');
 var levelup = require('levelup');
 var moment = require('moment');
 var path = require('path');
-var ringbuffer = new bunyan.RingBuffer({ limit: 100 });
+var ringbuffer = new bunyan.RingBuffer({ limit: 50 });
 
 var MemDOWN = require('memdown');
 
@@ -49,6 +49,7 @@ app.locals.logs = function () {
 		if (ringbuffer.records[i].level >= level) logs.push({
 			level: ringbuffer.records[i].level,
 			msg: ringbuffer.records[i].msg,
+			object: ringbuffer.records[i],
 			time: ringbuffer.records[i].time
 		});
 	}
@@ -111,7 +112,7 @@ async.series({
 				app.db = db;
 				app.log.trace({
 					store: 'LevelDOWN'
-				}, 'LevelDB initialized using disk I/O.');
+				}, 'Level initialized using disk I/O.');
 				next();
 			});
 		} else {
@@ -124,7 +125,7 @@ async.series({
 				app.db = db;
 				app.log.trace({
 					store: 'MemDOWN'
-				}, 'LevelDB initialized using volatile RAM.');
+				}, 'Level initialized using volatile RAM.');
 				next();
 			});
 		}
