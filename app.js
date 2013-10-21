@@ -96,8 +96,10 @@ async.series({
 			].filter(function (a) {return !!a;})
 		});
 		app.log.info({
-			environment: app.get('env'),
-			writable: app.get('environmentWritable')
+			environment: {
+				name: app.get('env'),
+				writable: app.get('environmentWritable')
+			}
 		}, 'Starting up.');
 		app.log.trace('Logger initialized.');
 		next();
