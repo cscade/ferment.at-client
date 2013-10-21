@@ -25,9 +25,9 @@ block body
 			each setting in settings
 				tr
 					td= setting.key
-					td(data-protected=setting.value.protected || false)= typeof setting.value.value === 'string' ? setting.value.value : ''
-						- if (typeof setting.value.value === 'object')
-							pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value.value, null, 2)
+					td= typeof setting.value === 'string' ? setting.value : ''
+						- if (typeof setting.value === 'object')
+							pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value, null, 2)
 
 block localJS
 	script(src="/js/shCore.js")

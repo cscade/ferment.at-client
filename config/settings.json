@@ -1,15 +1,10 @@
 {
-  "clientName": {
-    "protected": true,
-    "value": "My ferment.at Client"
-  },
-  "controllers": {
-    "protected": false,
-    "value": [
-      {
-        "address": "192.168.42.4",
-        "name": "Brewery BCS-460"
-      }
-    ]
-  }
+  "clientName": "My ferment.at Client",
+  "controllers": [
+    {
+      "address": "192.168.42.4",
+      "name": "Brewery BCS-460"
+    }
+  ],
+  "server": "http://localhost:3000"
 }
