@@ -1,5 +1,8 @@
 /*
 	# Routes entry point.
+
+	(The MIT License)
+	Copyright © 2013 Carson S. Christian <cscade@gmail.com>
 */
 /*jshint node:true */
 

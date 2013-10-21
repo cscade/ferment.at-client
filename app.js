@@ -1,7 +1,10 @@
 /*
 	# ferment.at-local
 
-	The local (LAN) component of ferment.at.
+	The official client module for the ferment.at cloud logging service.
+
+	(The MIT License)
+	Copyright © 2013 Carson S. Christian <cscade@gmail.com>
 */
 /*jshint node:true */
 
