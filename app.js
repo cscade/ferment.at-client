@@ -1,6 +1,9 @@
 /*
-	# test-leveldb
+	# ferment.at-local
+
+	The local (LAN) component of ferment.at.
 */
+/*jshint node:true */
 
 var app;
 var async = require('async');
