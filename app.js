@@ -166,6 +166,8 @@ async.series({
 		server.listen(app.get('config').listen);
 	}
 }, function (e) {
+	var settings;
+	
 	if (e) {
 		app.log.error(e, 'Initialization failed.');
 		return process.exit(1);
@@ -175,4 +177,13 @@ async.series({
 		port: app.get('config').listen,
 		version: app.get('package').version
 	}, 'Client ready.');
+	/*
+		Review settings file.
+	*/
+	try {
+		settings = require('./config/settings.json');
+		app.set('settings', settings);
+	} catch (e) {
+		app.log.fatal(e, 'Your settings.json file is invalid.');
+	}
 });

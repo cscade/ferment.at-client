@@ -1,0 +1,39 @@
+extends ../_base
+
+//- Logs page.
+append css
+	link(href='/css/shCore.css', rel='stylesheet')
+	link(href='/css/shThemeDefault.css', rel='stylesheet')
+
+append head
+	title Settings
+
+block body
+	h2 Settings
+	.alert.alert-info
+		h4 Heads up!
+		p
+			| Settings cannot be edited here. Instead, make changes to 
+			strong ./config/settings.json
+			|  and then restart the client.
+	table.table
+		thead
+			tr
+				th Key
+				th Value
+		tbody
+			each setting in settings
+				tr
+					td= setting.key
+					td(data-protected=setting.value.protected || false)= typeof setting.value.value === 'string' ? setting.value.value : ''
+						- if (typeof setting.value.value === 'object')
+							pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value.value, null, 2)
+
+block localJS
+	script(src="/js/shCore.js")
+	script(src="/js/shBrushJScript.js")
+	script.
+		jQuery(document).ready(function () {
+			// Syntax highlight.
+			SyntaxHighlighter.all();
+		});

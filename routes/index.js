@@ -19,6 +19,24 @@ module.exports = function (app) {
 	});
 	
 	/*
+		## GET /settings
+	*/
+	app.get('/settings', function (req, res, next) {
+		var parsed = [];
+		var settings = app.get('settings');
+		
+		Object.keys(settings).forEach(function (k) {
+			parsed.push({
+				key: k,
+				value: settings[k]
+			});
+		});
+		res.render('settings', {
+			settings: parsed
+		});
+	});
+	
+	/*
 		404
 	*/
 	app.all('*', function (req, res) {
