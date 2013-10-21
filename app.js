@@ -27,7 +27,7 @@ var MemDOWN = require('memdown');
 */
 app = express();
 
-app.set('config', require('./config/' + app.get('env') + '.json'));
+app.set('config', require('./config/client/' + app.get('env') + '.json'));
 app.set('package', require('./package.json'));
 
 /*
