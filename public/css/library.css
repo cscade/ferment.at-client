@@ -1,4 +1,4 @@
-body{padding-top:60px}
+body{padding-top:80px}
 tr.interactive{cursor:pointer}
 .table tbody>tr>td.log-level{width:80px;vertical-align:middle;text-align:right;font-weight:200;font-size:12px;}
 .table tbody>tr>td.log-level.log-level-trace{color:#c0c0c0}
