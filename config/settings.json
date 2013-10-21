@@ -2,6 +2,7 @@
   "clientName": "My ferment.at Client",
   "controllers": [
     {
+      "adapter": "fermentat-contrib-adapter-bcs-46x",
       "address": "192.168.42.4",
       "name": "Brewery BCS-460"
     }

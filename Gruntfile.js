@@ -33,6 +33,7 @@ module.exports = function (grunt) {
 			],
 			server: [
 				'app.js',
+				'adapters/**/*.js',
 				'lib/**/*.js',
 				'routes/**/*.js'
 			],
@@ -47,6 +48,7 @@ module.exports = function (grunt) {
 				files: {
 					src: [
 						'app.js',
+						'adapters/**/*.js',
 						'lib/**/*.js',
 						'routes/**/*.js',
 						'<%= locations.js.src %>/views/**/*.js'
@@ -135,6 +137,7 @@ module.exports = function (grunt) {
 			server: {
 				files: [
 					'app.js',
+					'adapters/**/*.js',
 					'lib/**/*.js',
 					'routes/**/*.js'
 				],

@@ -8,6 +8,7 @@
 */
 /*jshint node:true */
 
+var adapters = require('./adapters');
 var app;
 var async = require('async');
 var bunyan = require('bunyan');
@@ -191,4 +192,8 @@ async.series({
 	} catch (e) {
 		app.log.fatal(e, 'Your settings.json file is invalid.');
 	}
+	/*
+		Spin up adapters.
+	*/
+	adapters.attach(app);
 });
