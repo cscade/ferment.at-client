@@ -5,14 +5,25 @@ append head
 	title ferment.at Client
 
 block body
-	h1 ferment.at Client 
-		small
-			| is running.
-	include ../includes/help
-	hr
-	h2 Status
-	dl.dl-horizontal
-		dt Last Cloud Connection
-		dd Never connected to the cloud.
-		dt Last Controller Connection
-		dd Never connected to an automation controller.
+	.row
+		.col-md-5
+			- if (settings)
+				h1 Client 
+					small running!
+			- else
+				h1 Client 
+					small disabled.
+				.alert.alert-danger
+					h4 Invalid Settings
+					p
+						| There is something wrong with your 
+						strong ./config/settings.json
+						|  file.
+				include ../includes/help
+		.col-md-7
+			h2 Status
+			dl.dl-horizontal
+				dt Last Cloud Connection
+				dd Never connected to the cloud.
+				dt Last Controller Connection
+				dd Never connected to an automation controller.

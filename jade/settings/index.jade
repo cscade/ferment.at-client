@@ -9,25 +9,29 @@ append head
 	title Settings
 
 block body
-	h2 Settings
-	.alert.alert-info
-		h4 Heads up!
-		p
-			| Settings cannot be edited here. Instead, make changes to 
-			strong ./config/settings.json
-			|  and then restart the client.
-	table.table
-		thead
-			tr
-				th Key
-				th Value
-		tbody
-			each setting in settings
-				tr
-					td= setting.key
-					td= typeof setting.value === 'string' ? setting.value : ''
-						- if (typeof setting.value === 'object')
-							pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value, null, 2)
+	.row
+		.col-md-5
+			h2 Settings
+			.alert.alert-info
+				h4 Heads up!
+				p
+					| Settings cannot be edited here. Instead, make changes to 
+					strong ./config/settings.json
+					|  and then restart the client.
+			include ../includes/help
+		.col-md-7
+			table.table
+				thead
+					tr
+						th Key
+						th Value
+				tbody
+					each setting in settings
+						tr
+							td= setting.key
+							td= typeof setting.value === 'string' ? setting.value : ''
+								- if (typeof setting.value === 'object')
+									pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value, null, 2)
 
 block localJS
 	script(src="/js/shCore.js")

@@ -8,7 +8,9 @@ module.exports = function (app) {
 		## GET /
 	*/
 	app.get('/', function (req, res) {
-		res.render('index');
+		res.render('index', {
+			settings: app.get('settings')
+		});
 	});
 	
 	/*
