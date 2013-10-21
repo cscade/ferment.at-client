@@ -54,6 +54,7 @@ async.series({
 		// Log only to a ringbuffer, except in development mode.
 		app.log = bunyan.createLogger({
 			name: app.get('package').name,
+			serializers: bunyan.stdSerializers,
 			streams: [
 				{
 					level: app.get('env') === 'development' ? 'trace' : 'info',
