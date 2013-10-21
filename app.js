@@ -10,9 +10,14 @@ var async = require('async');
 var bunyan = require('bunyan');
 var db;
 var express = require('express');
+var errorHandler = require('./lib/use/errorHandler');
 var fd;
+var flash = require('connect-flash');
 var fs = require('fs');
+var http = require('http');
 var levelup = require('levelup');
+var path = require('path');
+
 var MemDOWN = require('memdown');
 
 /*
@@ -22,6 +27,11 @@ app = express();
 
 app.set('config', require('./config/' + app.get('env') + '.json'));
 app.set('package', require('./package.json'));
+
+/*
+	Jade locals.
+*/
+app.locals.version = app.get('package').version;
 
 /*
 	Check writable disk state.
@@ -64,7 +74,7 @@ async.series({
 		next();
 	},
 	/*
-		
+		Database.
 	*/
 	database: function (next) {
 		if (app.get('environmentWritable')) {
@@ -94,10 +104,49 @@ async.series({
 			});
 		}
 	},
+	/*
+		Express.
+	*/
+	express: function (next) {
+		app.set('views', __dirname + '/jade');
+		app.set('view engine', 'jade');
+		app.use(express.compress());
+		app.use(express.static(path.join(__dirname, 'public'), {
+			// Set cache age to 1 day in production.
+			maxAge: app.get('env') === 'production' ? 86400000 : 0
+		}));
+		app.use(express.bodyParser());
+		app.use(express.cookieParser());
+		app.use(express.cookieSession({
+			key: 'csid',
+			secret: 'nerple'
+		}));
+		app.use(flash());
+		app.use(app.router);
+		require('./routes')(app);
+		app.use(errorHandler(app));
+		app.log.trace('Express initialized.');
+		next();
+	},
+	/*
+		Listen.
+	*/
+	listen: function (next) {
+		var server;
+		
+		server = http.createServer(app);
+		server.on('error', next);
+		server.on('listening', next);
+		server.listen(app.get('config').listen);
+	}
 }, function (e) {
 	if (e) {
 		app.log.error(e, 'Initialization failed.');
 		return process.exit(1);
 	}
-	app.log.info('Initialization complete.');
+	app.log.info({
+		environment: app.get('env'),
+		port: app.get('config').listen,
+		version: app.get('package').version
+	}, 'http server ready');
 });
