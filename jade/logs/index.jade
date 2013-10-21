@@ -1,0 +1,17 @@
+extends ../_base
+
+//- Logs page.
+block body
+	h2 Log Viewer
+	table.table
+		thead
+			tr
+				th.hidden-xs Time
+				th
+				th Message
+		tbody
+			each log in logs()
+				tr
+					td.hidden-xs= moment(log.time).calendar()
+					td(class='log-level log-level-' + logLevels[log.level].toLowerCase())= logLevels[log.level]
+					td= log.msg

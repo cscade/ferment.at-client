@@ -1,0 +1,33 @@
+//- Error page.
+doctype 5
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		//- link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
+		//- link(rel="icon", href="/images/favicon.ico", type="image/x-icon")
+		//- Bootstrap core CSS.
+		link(href="/css/bootstrap.min.css", rel="stylesheet")
+		//- Application-specific CSS.
+		link(href='/css/library.css?v=' + version, rel='stylesheet')
+		title= "Oops! | Logger"
+	body
+		.container
+			h1 Problem!
+			hr
+			- if (message)
+				.alert.alert-danger
+					p!= message
+			p Use your browser Back button, or you can 
+				a(href="/") return home
+				| , or you can 
+				a(href="/login") log in
+				| .
+
+		hr
+		footer
+		script(src="/js/jquery.min.js")
+		script.
+			jQuery.noConflict();
+		script(src="/js/bootstrap.min.js")
