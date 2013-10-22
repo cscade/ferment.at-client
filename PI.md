@@ -57,8 +57,7 @@ v0.10.21
 To begin with, we will require the node library `forever`, which will make sure our client process stays running at all times.
 
 ```sh
-# The full path to npm is required here, since root doesn't have npm in it's path.
-sudo /opt/node/bin/npm install -g forever
+sudo -i npm install -g forever
 ```
 
 Installing forever can take quite some time, as it has many dependencies. After installation, running `forever list` should yeild "No forever processes running", indicating a successfull install.
