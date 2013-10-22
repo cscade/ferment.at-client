@@ -76,10 +76,14 @@ While your pi is still connected to ethernet, ssh in and plug in the adapter. Ne
 
 Replacing **SSID** and **PASSWORD** with your own network information. Save your changes, and then manually cycle the interface;
 
-    sudo ifdown wlan0
-    sudo ifup wlan0=wireless0
+```sh
+sudo ifdown wlan0
+sudo ifup wlan0=wireless0
+```
 
-You should see some setup messages followed by a successful DHCP lease if everything worked correctly. If you need to add additional wireless APs, you can create additional `iface wirelessX inet dhcp` entries, and switch to them by changing the `auto wlan0=wirelessX` line accordingly. Your changes will not take effect until you reboot the device or manually cycle the interface as above.
+You should see some setup messages followed by a successful DHCP lease if everything worked correctly.
+
+If you need to add additional wireless APs, you can create additional `iface wirelessX inet dhcp` entries, and switch to them by changing the `auto wlan0=wirelessX` line accordingly. Your changes will not take effect until you reboot the device or manually cycle the interface as above.
 
 ## Setting up bonjour (optional)
 
@@ -87,6 +91,8 @@ I like my pi to show up on my network by hostname so I don't have to go hunt dow
 
 Next, let's get libnss-mdns set up;
 
-    sudo apt-get update && sudo apt-get install -y libnss-mdns
+```sh
+sudo apt-get update && sudo apt-get install -y libnss-mdns
+```
 
 After installation completes, you should be able to connect to your pi at `hostname.local`.
