@@ -2,6 +2,10 @@
 
 The document contains the setup steps required to get a raspberry pi up and running the official ferment.at client.
 
+> Please note that although running the client on the Raspberry Pi is a supported configuration, it's up to you to support the Pi itself. The ferment.at support staff won't be able to help you with configuring the device.
+
+## Initial Setup
+
 Start with the official raspberry pi foundation distribution of raspian. Look for "Raw Images, Raspian" - [Downloads | Raspberry Pi](http://www.raspberrypi.org/downloads).
 
 After creating a bootable SD card using the downloaded image, insert it into the pi, plug it into your wired network, and boot it up. Find the pi on your network by locating it's hostname in your router's DHCP client list, or whatever method you prefer. SSH in, run raspi-config, expand your boot partition, change your password, and reboot. Optionally, I also recommend (in raspi-config) going to the advanced options and changing your memory split to the smallest supported value - you don't be using the desktop on this pi, so free up as much RAM as you can.
@@ -12,27 +16,41 @@ After all updates have been applied, we will install node.js.
 
 ## Install node.js
 
-Fortunately, node packages pre-compiled for the pi are available, so we don't need to spend hours compiling on the device. Begin by determining the most recent version of node available in precompiled form. Browse to http://nodejs.org/dist/ and look in the newest version folder for a package containing `linux-arm-pi`. At the time of this writing, that turned out to be http://nodejs.org/dist/v0.10.21/node-v0.10.21-linux-arm-pi.tar.gz, although you may have to go back a few versions from the bleeding edge to find one that is precompiled. Let's install the binary.
+Fortunately, node packages pre-compiled for the pi are available, so we don't need to spend hours compiling on the device.
 
-    # Be sure to adjust each instance of node-VERSION-linux-arm-pi.tar.gz below.
-    cd && wget http://nodejs.org/dist/v0.10.21/node-v0.10.21-linux-arm-pi.tar.gz && tar xzf node-v0.10.21-linux-arm-pi.tar.gz
-    sudo mkdir -p /opt/node && sudo cp -R node-v0.10.21-linux-arm-pi/* /opt/node
+Begin by determining the most recent version of node available in precompiled form. Browse to http://nodejs.org/dist/ and look in the newest version folder for a package containing `linux-arm-pi`. At the time of this writing, that turned out to be http://nodejs.org/dist/v0.10.21/node-v0.10.21-linux-arm-pi.tar.gz, although you may have to go back a few versions from the bleeding edge to find one that is precompiled.
 
-The node binary will now be available at `/opt/node/bin/node`. Let's clean up after ourselves a little bit, and make it easier to access the binary;
+Let's install the binary.
 
-    rm -r ./node-v0.10.21-linux-arm-pi*
-    # Edit /etc/profile to include node in the path.
-    sudo nano /etc/profile
-    # Insert the following lines just above "export PATH":
-    NODE_JS_HOME="/opt/node"
-    PATH="$PATH:$NODE_JS_HOME/bin"
-    # Save the file. ^X Y [enter]
+```sh
+# Be sure to adjust each instance of node-VERSION-linux-arm-pi.tar.gz below.
+cd && wget http://nodejs.org/dist/v0.10.21/node-v0.10.21-linux-arm-pi.tar.gz && tar xzf node-v0.10.21-linux-arm-pi.tar.gz
+sudo mkdir -p /opt/node && sudo cp -R node-v0.10.21-linux-arm-pi/* /opt/node
+```
+
+The node binary will now be available at `/opt/node/bin/node`.
+
+Let's clean up after ourselves a little bit, and make it easier to access the binary;
+
+```sh
+# Clean up.
+rm -r ./node-v0.10.21-linux-arm-pi*
+
+# Edit /etc/profile to include node in the path.
+sudo nano /etc/profile
+
+# Insert the following lines just above "export PATH":
+NODE_JS_HOME="/opt/node"
+PATH="$PATH:$NODE_JS_HOME/bin"
+# Save the file. ^X Y [enter]
+```
 
 At this point you're done installing node. You can either log out and back in, or you can `source /etc/profile` to make the new path available. Then, you can check your node version;
 
-    pi@fermentat-client:~$ node --version
-    v0.10.21
-
+```sh
+pi@fermentat-client:~$ node --version
+v0.10.21
+```
 
 ## Install ferment.at-client
 
