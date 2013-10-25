@@ -7,6 +7,15 @@
 /*jshint node:true */
 
 /*
+	## controllers
+
+	List of initalized controllers.
+
+	Only controllers which were successfully initialized appear here.
+*/
+exports.controllers = [];
+
+/*
 	## attach
 
 	Attach all controller adapters.
@@ -34,6 +43,11 @@ exports.attach = function (app) {
 				err: e,
 				controller: controller
 			}, 'Unable to connect adapter for "%s".', controller.name);
+			exports.controllers.push({
+				adapter: adapter,
+				configuration: controller,
+				mtime: Date.now()
+			});
 			app.log.info({
 				adapter: {
 					device: adapter.device.info,

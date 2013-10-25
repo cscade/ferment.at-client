@@ -1,0 +1,56 @@
+extends ../_base
+
+//- Logs page.
+append css
+	link(href='/css/shCore.css', rel='stylesheet')
+	link(href='/css/shThemeDefault.css', rel='stylesheet')
+
+append head
+	title Controllers
+
+block body
+	.row
+		.col-xs-12
+			h2 Initialized Controllers
+			p.lead All process controllers that have been successfully initialized appear here.
+	- if (controllers.length === 0)
+		p No controllers have been initialized.
+		include ../includes/help
+	- else
+		each controller, index in controllers
+			- if (index % 2 === 0)
+				.row
+					.col-md-6
+						.panel.panel-info
+							.panel-heading
+								h3.panel-title= controller.configuration.name
+							.panel-body
+								dl.dl-horizontal
+									dt Device Type
+									dd= controller.adapter.deviceType
+									dt Location
+									dd= controller.configuration.address + (controller.configuration.port ? (':' + controller.configuration.port) : '')
+									dt Last Contact
+									dd= moment(controller.mtime).fromNow()
+					- if (controllers[index + 1])
+						.col-md-6
+							.panel.panel-info
+								.panel-heading
+									h3.panel-title= controllers[index + 1].configuration.name
+								.panel-body
+									dl.dl-horizontal
+										dt Device Type
+										dd= controllers[index + 1].adapter.deviceType
+										dt Location
+										dd= controllers[index + 1].configuration.address + (controllers[index + 1].configuration.port ? (':' + controllers[index + 1].configuration.port) : '')
+										dt Last Contact
+										dd= moment(controllers[index + 1].mtime).fromNow()
+
+block localJS
+	script(src="/js/shCore.js")
+	script(src="/js/shBrushJScript.js")
+	script.
+		jQuery(document).ready(function () {
+			// Syntax highlight.
+			SyntaxHighlighter.all();
+		});

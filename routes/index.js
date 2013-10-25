@@ -6,6 +6,8 @@
 */
 /*jshint node:true */
 
+var adapters = require('../adapters');
+
 module.exports = function (app) {
 	/*
 		## GET /
@@ -13,6 +15,15 @@ module.exports = function (app) {
 	app.get('/', function (req, res) {
 		res.render('index', {
 			settings: app.get('settings')
+		});
+	});
+	
+	/*
+		## GET /controllers
+	*/
+	app.get('/controllers', function (req, res) {
+		res.render('controllers', {
+			controllers: adapters.controllers
 		});
 	});
 	
