@@ -46,7 +46,8 @@ exports.attach = function (app) {
 			exports.controllers.push({
 				adapter: adapter,
 				configuration: controller,
-				mtime: Date.now()
+				mtime: Date.now(),
+				status: 'success'
 			});
 			app.log.info({
 				adapter: {

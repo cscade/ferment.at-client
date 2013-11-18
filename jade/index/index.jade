@@ -23,7 +23,15 @@ block body
 		.col-md-7
 			h2 Status
 			dl.dl-horizontal
-				dt Last Cloud Connection
+				dt Cloud Connection
 				dd Never connected to the cloud.
-				dt Last Controller Connection
-				dd Never connected to an automation controller.
+			dl.dl-horizontal
+				- if (controllers.length === 0)
+					p No controllers have been initialized.
+					include ../includes/help
+				- else
+					each controller in controllers
+						dt= controller.configuration.name
+						dd
+							span(class="label label-" + controller.status, style="margin-right:7px;")= (controller.status === 'success' ? 'ok' : controller.status).toUpperCase()
+							| #{moment(controller.mtime).fromNow()}
