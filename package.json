@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "author": "Carson S. Christian <cscade@gmail.com>",
   "dependencies": {
-    "express": "~3.4.2",
+    "express": "~3.4.4",
     "levelup": "~0.17.0",
     "memdown": "~0.5.1",
-    "leveldown": "~0.9.1",
+    "leveldown": "~0.9.2",
     "async": "~0.2.9",
     "bunyan": "~0.22.0",
     "connect-flash": "~0.1.1",
