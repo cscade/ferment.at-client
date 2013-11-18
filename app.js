@@ -147,7 +147,8 @@ async.series({
 			// Set cache age to 1 day in production.
 			maxAge: app.get('env') === 'production' ? 86400000 : 0
 		}));
-		app.use(express.bodyParser());
+		app.use(express.urlencoded());
+		app.use(express.json());
 		app.use(express.cookieParser());
 		app.use(express.cookieSession({
 			key: 'csid',
