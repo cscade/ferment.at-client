@@ -1,11 +1,12 @@
 {
-  "clientName": "My ferment.at Client",
+  "apiEndpoint": "http://localhost:3001/v1/",
+  "apiKey": "sk_39093ec12da74aebb585fc1dff5857a8",
+  "clientId": "cl_MBm6",
   "controllers": [
     {
       "adapter": "fermentat-contrib-adapter-bcs-46x",
       "address": "192.168.42.4",
       "name": "Brewery BCS-460"
     }
-  ],
-  "server": "http://localhost:3000"
+  ]
 }
