@@ -8,6 +8,7 @@ tr.interactive{cursor:pointer}
 .table tbody>tr>td.log-level.log-level-error{color:#d9534f}
 .table tbody>tr>td.log-level.log-level-fatal{color:#d9534f;font-weight:bold}
 .panel-body dl{margin:0}
+.text-monospace{font-family:"Courier New",Courier,monospace}
 @media (min-width: 768px){.dl-horizontal dt{width:200px}
 .dl-horizontal dd{margin-left:220px}
 }.syntaxhighlighter .string,.syntaxhighlighter .string a{color:#39c !important}

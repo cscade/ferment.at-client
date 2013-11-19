@@ -32,9 +32,11 @@ block body
 					each setting in settings
 						tr
 							td= setting.key
-							td= typeof setting.value === 'string' ? setting.value : ''
+							td.text-monospace
 								- if (typeof setting.value === 'object')
 									pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value, null, 2)
+								- else
+									| #{setting.value}
 
 block localJS
 	script(src="/js/shCore.js")
