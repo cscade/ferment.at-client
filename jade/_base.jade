@@ -6,14 +6,12 @@ html(lang='en')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
 		link(rel="icon", href="/images/favicon.ico", type="image/x-icon")
-		//- Bootstrap core CSS.
 		link(href="/css/bootstrap.min.css", rel="stylesheet")
-		block css
-		//- Application-specific CSS.
+		link(href='/css/shCore.css', rel='stylesheet')
+		link(href='/css/shThemeDefault.css', rel='stylesheet')
 		link(href='/css/library.css?v=' + version, rel='stylesheet')
 		block head
 	body
-		include ./includes/navbar
 		.container
 			- if (flash)
 				.row
@@ -32,4 +30,6 @@ html(lang='en')
 		script.
 			jQuery.noConflict();
 		script(src="/js/bootstrap.min.js")
+		script(src="/js/shCore.js")
+		script(src="/js/shBrushJScript.js")
 		block localJS

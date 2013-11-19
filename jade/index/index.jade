@@ -6,21 +6,8 @@ append head
 
 block body
 	.row
-		.col-md-5(style="text-align:center;")
-			img(src="/images/logo_200x2.png", width="200", height="200")
-			- if (settings)
-				h1= settings.clientName || 'Client'
-			- else
-				h1 Client 
-					small disabled.
-				.alert.alert-danger
-					h4 Invalid Settings
-					p
-						| There is something wrong with your 
-						strong ./config/settings.json
-						|  file.
-				include ../includes/help
 		.col-md-7
+			h1.visible-xs= settings.clientName || 'Client'
 			h2 Status
 			dl.dl-horizontal
 				dt Cloud Connection
@@ -35,3 +22,119 @@ block body
 						dd
 							span(class="label label-" + controller.status, style="margin-right:7px;")= (controller.status === 'success' ? 'ok' : controller.status).toUpperCase()
 							| #{moment(controller.mtime).fromNow()}
+		.col-md-5.text-center.hidden-xs
+			img(src="/images/logo_200x2.png", width="200", height="200")
+			- if (settings)
+				h1= settings.clientName || 'Client'
+			- else
+				h1 Client 
+					small disabled.
+				.alert.alert-danger
+					h4 Invalid Settings
+					p
+						| There is something wrong with your 
+						strong ./config/settings.json
+						|  file.
+				include ../includes/help
+	hr
+	.row
+		.col-xs-12
+			h2 Log Viewer
+			p.lead The most recent 50 log items are visible here. More log history is available 
+				a(href="https://ferment.at/client/_client-ref_") online
+				| .
+			table.table#logTable
+				thead
+					tr
+						th.hidden-xs Time
+						th
+						th Message
+				tbody
+					each log in logs()
+						tr.interactive
+							td.hidden-xs= moment(log.time).calendar()
+							td(class='log-level log-level-' + logLevels[log.level].toLowerCase())= logLevels[log.level]
+							td= log.msg
+						tr.hide.details
+							td(colspan=3)
+								pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(log.object, null, 2)
+	hr
+	.row
+		.col-xs-12
+			h2 Initialized Controllers
+			p.lead All process controllers that have been successfully initialized appear here.
+	.row
+		.col-xs-12
+			- if (controllers.length === 0)
+				p No controllers have been initialized.
+				include ../includes/help
+			- else
+				each controller, index in controllers
+					- if (index % 2 === 0)
+						.row
+							.col-md-6
+								.panel.panel-info
+									.panel-heading
+										h3.panel-title= controller.configuration.name
+									.panel-body
+										dl.dl-horizontal
+											dt Device Type
+											dd= controller.adapter.deviceType
+											dt Location
+											dd= controller.configuration.address + (controller.configuration.port ? (':' + controller.configuration.port) : '')
+											dt Last Contact
+											dd= moment(controller.mtime).fromNow()
+							- if (controllers[index + 1])
+								.col-md-6
+									.panel.panel-info
+										.panel-heading
+											h3.panel-title= controllers[index + 1].configuration.name
+										.panel-body
+											dl.dl-horizontal
+												dt Device Type
+												dd= controllers[index + 1].adapter.deviceType
+												dt Location
+												dd= controllers[index + 1].configuration.address + (controllers[index + 1].configuration.port ? (':' + controllers[index + 1].configuration.port) : '')
+												dt Last Contact
+												dd= moment(controllers[index + 1].mtime).fromNow()
+	hr
+	.row
+		.col-xs-12
+			h2 Settings File
+			p.lead All the configuration details in your settings file are listed here.
+	.row
+		.col-md-7
+			table.table
+				thead
+					tr
+						th Key
+						th Value
+				tbody
+					each setting in parsed
+						tr
+							td= setting.key
+							td.text-monospace
+								- if (typeof setting.value === 'object')
+									pre(class="brush:js;gutter:false;smart-tabs:false;toolbar:false;")!= JSON.stringify(setting.value, null, 2)
+								- else
+									| #{setting.value}
+		.col-md-5
+			.alert.alert-info
+				h4 Heads up!
+				p
+					| Settings cannot be edited here. Instead, make changes to 
+					strong ./config/settings.json
+					|  and then restart the client.
+			include ../includes/help
+
+block localJS
+	script.
+		jQuery(document).ready(function () {
+			// Click for details.
+			jQuery('#logTable tr').click(function () {
+				if (jQuery(this).hasClass('details')) return;
+				jQuery(this).next('tr.details').toggleClass('hide');
+			});
+			// Syntax highlight.
+			SyntaxHighlighter.all();
+		});

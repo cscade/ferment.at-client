@@ -13,32 +13,6 @@ module.exports = function (app) {
 		## GET /
 	*/
 	app.get('/', function (req, res) {
-		res.render('index', {
-			controllers: adapters.controllers,
-			settings: app.get('settings')
-		});
-	});
-	
-	/*
-		## GET /controllers
-	*/
-	app.get('/controllers', function (req, res) {
-		res.render('controllers', {
-			controllers: adapters.controllers
-		});
-	});
-	
-	/*
-		## GET /logs
-	*/
-	app.get('/logs', function (req, res) {
-		res.render('logs');
-	});
-	
-	/*
-		## GET /settings
-	*/
-	app.get('/settings', function (req, res, next) {
 		var parsed = [];
 		var settings = app.get('settings');
 		
@@ -48,8 +22,10 @@ module.exports = function (app) {
 				value: settings[k]
 			});
 		});
-		res.render('settings', {
-			settings: parsed
+		res.render('index', {
+			controllers: adapters.controllers,
+			parsed: parsed,
+			settings: settings
 		});
 	});
 	
