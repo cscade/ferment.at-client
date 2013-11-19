@@ -49,7 +49,7 @@ app.locals.logs = function () {
 	var level = app.get('env') === 'production' ? bunyan.resolveLevel('info') : bunyan.resolveLevel('trace');
 	var logs = [];
 	
-	for (var i = ringbuffer.records.length - 1; i >= 0; i--) {
+	for (var i = ringbuffer.records.length - 1; i >= 0 && i > ringbuffer.records.length - 11; i--) {
 		if (ringbuffer.records[i].level >= level) logs.push({
 			level: ringbuffer.records[i].level,
 			msg: ringbuffer.records[i].msg,
