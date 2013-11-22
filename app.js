@@ -188,10 +188,10 @@ async.series({
 		Review settings file.
 	*/
 	try {
-		settings = require('./config/settings.json');
+		settings = require('./config.json');
 		app.set('settings', settings);
 	} catch (e) {
-		app.log.fatal(e, 'Your settings.json file is invalid.');
+		app.log.fatal(e, 'Your config.json file is invalid.');
 	}
 	/*
 		Spin up adapters.
