@@ -8,10 +8,10 @@
 */
 /*jshint node:true */
 
-var adapters = require('./adapters');
 var app;
 var async = require('async');
 var bunyan = require('bunyan');
+var cloud = require('./lib/modules/cloud');
 var db;
 var express = require('express');
 var errorHandler = require('./lib/use/errorHandler');
@@ -194,7 +194,7 @@ async.series({
 		app.log.fatal(e, 'Your config.json file is invalid.');
 	}
 	/*
-		Spin up adapters.
+		Initialize cloud connection.
 	*/
-	adapters.attach(app);
+	cloud.initialize(app);
 });

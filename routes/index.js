@@ -6,7 +6,7 @@
 */
 /*jshint node:true */
 
-var adapters = require('../adapters');
+var adapters = require('../lib/modules/adapters');
 
 module.exports = function (app) {
 	/*
