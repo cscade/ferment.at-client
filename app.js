@@ -1,5 +1,5 @@
 /*
-	# ferment.at-local
+	# ferment.at-client
 
 	The official client module for the ferment.at cloud logging service.
 
@@ -13,8 +13,8 @@ var async = require('async');
 var bunyan = require('bunyan');
 var cloud = require('./lib/modules/cloud');
 var db;
-var express = require('express');
 var errorHandler = require('./lib/use/errorHandler');
+var express = require('express');
 var fd;
 var flash = require('connect-flash');
 var fs = require('fs');
